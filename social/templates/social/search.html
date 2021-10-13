@@ -1,0 +1,66 @@
+{% extends 'landing/base.html' %}
+
+{% block title %}User Search{% endblock %}
+
+{% block content %}
+	<div class="container">
+
+		<div class="row mt-5">
+			<div class="col-md-2 col-sm-2">
+				<a class="btn btn-dark" href="{% url 'post-list' %}">Back to Feed</a>
+			</div>
+		</div>
+
+		{% for profile in profile_list %}
+			<div class="row justify-content-center mt-3">
+				<div class="col-md-5 col-sm-12 border-bottom position-relative py-4 px-4" style="box-shadow: none; border: 0.1px solid grey; border-radius: 10px;">
+					<div>
+						<a href="{% url 'profile' profile.pk %}">
+							<img class="rounded-circle post-img" height="40" width="40" src="{{ profile.picture.url }}"/>
+						</a>
+						<p class="post-text">
+							<strong><a style="text-decoration: none;" class="btn btn-dark" href="{% url 'profile' profile.pk %}">@{{ profile.user }}</a></strong>
+						</p>
+					</div> 
+					{% if profile.name %}
+						<p><strong>Name : </strong>{{ profile.name }}</p>
+					{% endif %}
+					
+					{% if profile.bio %}
+						<p><strong>Bio : </strong>{{ profile.bio }}</p>
+					{% endif %}
+					<p style="color: grey;"><strong>Followers : </strong>{{ profile.followers.all.count }}</p>
+				</div>
+			</div>
+		{% endfor %}
+
+		<br>
+		<br>
+		<hr>
+		<br>
+		<div class="row justify-content-center mt-3 ml-4">
+			<div class="col-md-4 col-lg-20 ml-4">
+				<p class="lead" style="font-size: 20px;color: grey;">Founder of Hyve : <em>Alexandre Lisiecki</em></p>
+			</div>
+		</div>
+		<br>
+		<br>
+	</div>
+
+		
+{% endblock %}
+
+<!-- <div class="card shadow-sm row justify-content-center mt-3">
+	<div class="card-body">
+		<p><strong class="card-header"><a style="text-decoration: none;" class="text-primary" href="{% url 'profile' profile.pk %}">@{{ post.author }}</a></strong>
+		
+		{% if profile.name %}
+			<p><strong>Name : </strong>{{ profile.name }}</p>
+		{% elif profile.location %}
+			<p>{<strong>Location : </strong>{ profile.location }}</p>
+		{% elif profile.bio %}
+			<p><strong>Bio : </strong>{{ profile.bio }}</p>
+		{% endif %}
+		<p>Followers :  {{ profile.followers.all.count }}</p>
+	</div>
+</div> -->

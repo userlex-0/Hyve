@@ -1,0 +1,106 @@
+{% extends 'landing/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Direct Messages{% endblock %}
+
+{% block content %}
+
+	<style type="text/css">
+		.back-button {
+			color: white;
+			background-color: black;
+			border-radius: 10px;
+			transition: 0.3s;
+			padding: 25px;
+		}
+
+		.back-button:hover {
+			color: white;
+			background-color: #6610f2;
+			font-size: 23px;
+			transition: 0.3s;
+		}
+
+		.padding-thread-box {
+			padding-left: 20px;
+		}
+	</style>
+
+
+<div class="container">
+
+
+	<div class="row">
+		<div class="col-sm-12">
+			<a href="{% url 'inbox' %}" class="btn back-button btn-lg">Back to Your Inbox</a>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="card col-md-12 mt-5 p-3 shadow-sm box">
+			{% if thread.receiver == request.user %}
+				<span>
+					<!-- <img src="{{ profile.picture.url }}"> -->
+					<h5 class="receiver-username">@{{ thread.user }}</h5>
+				</span>
+				
+			{% else %}
+				<h5 class="receiver-username">@{{ thread.receiver }}</h5>
+			{% endif %}
+		</div>
+	</div>
+
+	{% if message_list.all.count == 0 %}
+	<div class="row my-5">
+		<div class="col-md-12">
+			<p class="empty-text">No Messages</p>
+		</div>
+	</div>
+	{% endif %}
+
+	{% for message in message_list %}
+	<div class="row">
+		{% if message.receiver_user == request.user %}
+			<div class="col-md-12">
+				{% if message.image %}
+					<div class="received-message-container">
+						<img src="{{ message.image.url }}" class="received-message-image" />
+					</div>
+				{% endif %}
+				<div class="received-message my-3">
+					<p>{{ message.body }}</p>
+				</div>
+			</div>
+		
+		{% elif message.sender_user == request.user %}
+			<div class="col-md-12 my-1">
+				{% if message.image %}
+					<div class="sent-message-container">
+						<img src="{{ message.image.url }}" class="sent-message-image" />
+					</div>
+				{% endif %}
+				<div class="sent-message my-3">
+					<p>{{ message.body }}</p>
+				</div>
+			</div>
+		{% endif %}
+	</div>
+
+	{% endfor %}
+
+	<div class="row box">
+		<div class="card col-md-12 p-3 shadow-sm box">
+			<form method="POST" action="{% url 'create-message' thread.pk %}" enctype="multipart/form-data">
+				{% csrf_token %}
+				{{ form | crispy }}
+
+				<div class="mt-3 message-button">
+					<button class="btn-lg send-message-button" type="submit">Send Message</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+{% endblock content %}

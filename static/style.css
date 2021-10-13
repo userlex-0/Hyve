@@ -1,0 +1,325 @@
+
+.post-img {
+	float: left;
+	margin-right: 1rem;
+}
+
+.post-image {
+	width: 300px;
+	height: 300px;
+	border-radius: 10px;
+	margin-bottom: 10px;
+}
+
+
+.child-comment {
+	margin-left: 2rem;
+}
+
+.notification-badge {
+	transition: 0.3s;
+}
+
+.notification-badge:hover {
+	cursor: pointer;
+	opacity: 0.75;
+	transition: 0.3s;
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content {
+	position: absolute;
+	background-color: #f1f1f1;
+	min-width: 300px;
+	box-shadow: 0px 8px 8px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+	font-size: 0.9rem;
+}
+
+.dropdown-content a {
+	color: #000;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+.dropdown-content a:hover {
+	background-color: #ddd;
+}
+
+.dropdown-item-parent {
+	position: relative;
+	display: block;
+}
+
+.dropdown-item-close {
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: 1.8rem;
+	padding-right: 5px;
+	transition: 0.3s;
+}
+
+.dropdown-item-close:hover {
+	color: rgb(180, 25, 25);
+	transition: 0.3s;
+	cursor: pointer;
+}
+
+.inbox-icon-container {
+	margin-right: 15px;
+	margin-top: 20px;
+}
+
+.inbox-icon {
+  	color: black;
+  	transition: 0.3s;
+  	font-size: 25px;
+}
+
+.inbox-icon:hover {
+	font-size: 30px;
+  	color: #6610f2;
+  	transition: 0.2s;
+}
+
+.title-hover {
+	text-decoration: none;
+	color: black;
+	font-size: 40px;
+	transition: 0.2s;
+}
+
+.title-hover:hover {
+	color: #6610f2;
+	font-size: 50px;
+	transition: 0.2s;
+}
+
+.outline-indigo {
+	color: #6610f2;
+	background-color:white; 
+	transition: 0.5s;
+	border-color: #6610f2;
+}
+
+.outline-indigo:hover {
+	color:white;
+	border-radius: 25px;
+	background-color: #6610f2;
+	transition: 0.5s;
+}
+
+.likes {
+	color: blue;
+	font-size: 15px;
+	transition: 0.3s;
+}
+
+.likes:hover {
+	color: white;
+	background-color: lightgrey;
+	font-size: 20px;
+	transition: 0.3s;
+}
+
+.dislikes {
+	color: red;
+	font-size: 15px;
+	transition: 0.3s;
+}
+
+.dislikes:hover {
+
+	color: white;
+	background-color: lightgrey;
+	font-size: 20px;
+	transition: 0.3s;
+}
+
+.author {
+	background-color:white;
+	color: #0046FF;
+	border-radius: 10px;
+	border-color: #0046FF;
+	transition: 0.3s;
+}
+
+.author:hover {
+	text-decoration: none;
+	background-color: #0046FF;
+	color: white;
+	border-radius: 20px;
+	transition: 0.3s;
+}
+
+.post {
+	border-radius: 10px;
+	background-color: white;
+	transition: 0.5s;
+}
+
+.post:hover {
+	background-color: #F6F6F6;
+	transition: 0.5s;
+}
+
+.delete-comment {
+	color:#dc3545;
+	transition: 0.3s;
+	border-color: #dc3545;
+	border-radius: 25px;
+}
+
+.delete-comment:hover {
+	color: white;
+	transition: 0.3s;
+	border-radius: 5px;
+	background-color: #dc3545;
+}
+
+.empty-text {
+	color: #777;
+	font-size: 1.5rem;
+	text-align: center;
+}
+
+.sent-message {
+	font-size: 20px;
+	background-color: #D6D6D6;
+	border-radius: 30px;
+	padding: 10px 25px;
+	width: 35%;
+	float: right;
+}
+
+.received-message {
+	font-size: 20px;
+	background-color: #6610f2;
+	color: #fff;
+	border-radius: 30px;
+	padding: 10px 25px;
+	width: 35%;
+}
+.receiver-username {
+	color: white;
+	font-size: 40px;
+}
+
+.box {
+	background-color: black;
+	border-radius: 10px;
+	box-shadow: none;
+}
+
+.send-message-button {
+	color: #6610f2;
+	border-color: #6610f2;
+	border-radius: 10px;
+	background-color: white;
+	transition: 0.3s;
+}
+.send-message-button:hover {
+	color: white;
+	border-radius: 20px;
+	background-color: #6610f2;
+	transition: 0.3s;
+}
+
+.message-button {
+	padding-left: 1117px;
+}
+
+.create-thread-button {
+	color: #0B0795;
+	background-color: white;
+	border-color: #0B0795;
+	border-radius: 10px;
+	transition: 0.3s;
+}
+
+.create-thread-button:hover {
+	color: white;
+	background-color: #0B0795;
+	border-radius: 14px;
+	font-size: 19px;
+	transition: 0.3s;
+}
+
+.received-message-image {
+	border-radius: 10px;
+	max-width: 40%;
+	height: auto;
+}
+
+.sent-message-container {
+	margin-left: 1010px;
+}
+
+.sent-message-image {
+	border-radius: 10px;
+	max-width: 100%;
+	height: auto;
+}
+
+.start-conv {
+	background-color: #020083;
+	color: white;
+	font-size: 20px;
+	border-radius: 10px;
+	transition: 0.3s;
+}
+
+.start-conv:hover {
+	background-color: #001FFF;
+	color: white;
+	font-size: 21px;
+	border-radius: 16px;
+	transition: 0.3s;
+}
+
+.inbox-convs {
+	color: black;
+	font-size: 25px;
+	border-radius: 10px;
+	transition: 0.3s;
+	text-decoration: none;
+}
+
+.share-btn {
+    cursor: pointer;
+    margin-left:10px;
+    color: black;
+    transition: 0.3s;
+}
+
+.share-btn:hover {
+    margin-left:10px;
+    color: #0275d8;
+    font-size: 20px;
+    transition: 0.3s;
+}
+
+.shared-post {
+    margin-left: 30px;
+}
+
+.body a {
+	text-decoration: none;
+	color: FF7D02;
+	transition: 0.3s;
+}
+
+.body a:hover {
+	text-decoration: none;
+	color: #FF7D02;
+	text-shadow: 0, 0, 0.125em #FF7D02;
+	transition: 0.3s;
+}
+
+

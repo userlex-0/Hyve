@@ -1,0 +1,231 @@
+{% extends 'landing/base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+
+	<style type="text/css">
+
+		.back-button {
+			color: white;
+			background-color: black;
+			border-radius: 10px;
+			transition: 0.3s;
+		}
+
+		.back-button:hover {
+			color: white;
+			background-color: #6610f2;
+			font-size: 23px;
+			transition: 0.3s;
+		}
+		.body a {
+			text-decoration: underline;
+			color: FF7D02;
+			transition: 0.3s;
+		}
+
+		.body a:hover {
+			text-decoration: none;
+			color: #FF7D02;
+			text-shadow: 0, 0, 0.125em #FF7D02;
+			transition: 0.3s;
+		}
+
+		.btn-edit-profile {
+			color: #80009C;
+			background-color: white;
+			border-radius: 10px;
+			border-color: #80009C;
+			transition: 0.3s;
+		}
+
+		.btn-edit-profile:hover {
+			color: white;
+			background-color: #80009C;
+			border-radius: 15px;
+			transition: 0.3s;
+		}
+
+	</style>
+
+	<div class="container">
+
+		<div class="row mt-5">
+			<div class="col-md-3 col-sm-6">
+				<a href="{% url 'post-list' %}" class="btn back-button btn-lg">Back to Feed</a>
+			</div>
+		</div>
+
+		<div class="row justify-content-center mt-5">
+			<div class="card shadow-lg col-md-8 col-sm-12 border-bottom px-5 pt-3">
+				<div class="text-center">
+					<br>
+					<p><img src="{{ profile.picture.url }}" class="rounded-circle" width="100" height="100"/><shrek2 style="color: white;">----</shrek2><shrek class="display-4" style="font-weight: bold;">@{{ profile.user }}</shrek><shrek3 style="color: white;">----</shrek3><span>
+						{% if user == request.user %}
+						{% else %}
+							{% if is_following %}
+								<form method="POST" action="{% url 'remove-follower' profile.pk %}">
+									{% csrf_token %}
+									<button class="btn btn-outline-danger px-5 py-2" type="submit">Unfollow</button>
+								</form>
+							{% else %}
+								<form method="POST" action="{% url 'add-follower' profile.pk %}">
+									{% csrf_token %}
+									<button class="btn btn-outline-success px-5 py-2" type="submit">Follow</button>
+								</form>
+							{% endif %}
+						{% endif %}
+							{% if request.user == user %}
+								<a href="{% url 'profile-edit' profile.pk %}" class="btn btn-edit-profile btn-sm ml-5 mb-3 px-5">Edit Profile <i class="far fa-edit"></i></a>
+							{% endif %}
+						</span></p>
+						<hr>
+				</div>
+				<div class="mb-3">
+					<a href="{% url 'list-followers' profile.pk %}" style="font-size: 25px" class="btn">Followers :  {{ number_of_followers }}	<i class="fas fa-users"></i></a>			
+					<!-- {% if user == request.user %}
+					{% else %}
+						{% if is_following %}
+							<form method="POST" action="{% url 'remove-follower' profile.pk %}">
+								{% csrf_token %}
+								<button class="btn btn-outline-danger px-5 py-2" type="submit">Unfollow</button>
+							</form>
+						{% else %}
+							<form method="POST" action="{% url 'add-follower' profile.pk %}">
+								{% csrf_token %}
+								<button class="btn btn-outline-success px-5 py-2" type="submit">Follow</button>
+							</form>
+						{% endif %}
+					{% endif %} -->
+					
+				</div>
+				{% if profile.name %}
+					<p class="py-4" style="font-size: 25px"><strong>Name :</strong><shrek class="lead"> <shrek2 style="color: white;">---</shrek2>{{ profile.name }}</shrek>
+
+				{% else %}			
+					<p class="py-4" style="font-size: 25px"><strong>Name :</strong><shrek class="lead"> <shrek2 style="color: white;">---</shrek2>@{{ user.username }}</shrek>
+				{% endif %}
+					</p>
+
+				{% if profile.location %}
+					<p class="py-4" style="font-size: 25px"><strong>Location :</strong><shrek class="lead"> <shrek2 style="color: white;">---</shrek2>{{ profile.location }}</shrek><p>
+				{% endif %}
+
+				{% if profile.birth_date %}
+					<p class="py-4" style="font-size: 25px"><strong>Birth Date :</strong><shrek class="lead"><shrek2 style="color: white;">---</shrek2>{{ profile.birth_date }}</shrek><p>
+				{% endif %}
+
+				{% if profile.bio %}
+					<p class="py-4" style="font-size: 25px"><strong>Bio :</strong><shrek class="lead"> <shrek2 style="color: white;">---</shrek2>{{ profile.bio }}</shrek><p>
+				{% endif %}
+				
+			</div>
+			<!-- <div class="mb-3">
+				<p>Followers : {{ number_of_followers }}</p>				
+				{% if user == request.user %}
+				{% else %}
+					{% if is_following %}
+						<form method="POST" action="{% url 'remove-follower' profile.pk %}">
+							{% csrf_token %}
+							<button class="btn btn-outline-danger" type="submit">Unfollow</button>
+						</form>
+					{% else %}
+						<form method="POST" action="{% url 'add-follower' profile.pk %}">
+							{% csrf_token %}
+							<button class="btn btn-outline-success" type="submit">Follow</button>
+						</form>
+					{% endif %}
+				{% endif %}
+			</div> -->
+		</div>
+		<br>
+		<br>
+		<hr>
+		<div class="row justify-content-center mt-5">
+			<div class="col-md-4 col-sm-6">
+				<p class="display-6">Posts by @{{ profile.user }}</p>
+			</div>
+		</div>
+
+		{% for post in posts %}
+		<div class="card row justify-content-center mt-5 post">
+			<div class="card-body">
+				<div>
+					<a href="{% url 'profile' post.author.profile.pk %}">
+						<img class="rounded-circle post-img" height="40" width="40" src="{{ post.author.profile.picture.url }}"/>
+					</a>
+					<p class="post-text">
+						<strong><a style="text-decoration: none;" class="btn btn-light" href="{% url 'profile' post.author.profile.pk %}">@{{ post.author }}</a></strong> - {{ post.created_on }}
+					</p>
+				</div> 
+				<div class="position-relative">
+					{% if post.image.count > 0 %}
+						<div class="row">
+							{% for img in post.image.all %}
+								<div class="col-md-4 col-xs-12">
+									<img src="{{ img.image.url }}" class="post-image">
+								</div>
+							{% endfor %}
+						</div>
+					{% endif %}
+					<div class="body">
+						<p class="lead">{{ post.body }}</p>
+					</div>
+					<a href="{% url 'post-detail' post.pk %}" class="stretched-link"></a>
+				</div>
+				<div class="d-flex flex-row">
+					<form method="POST" action="{% url 'like' post.pk %}">
+						{% csrf_token %}
+						<input type="hidden" name="next" value="{{ request.path }}">
+						<button class="btn px-4 likes" type="submit" style="color: #0d6efd;">
+							<i class="fas fa-arrow-alt-circle-up"> <span style="font-family: Arial;">{{ post.likes.all.count }}</span></i>
+						</button><shrek style="color:white;">--</shrek>
+					</form>
+
+					<form method="POST" action="{% url 'dislike' post.pk %}">
+						{% csrf_token %}
+						<input type="hidden" name="next" value="{{ request.path }}">
+						<button class="btn px-4 dislikes" type="submit" style="color: #dc3545;">
+							<i class="fas fa-arrow-alt-circle-down"> <span style="font-family: Arial;">{{ post.dislikes.all.count }}</span></i>
+						</button>
+					</form>
+						
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+		<br>
+		<br>
+		<hr>
+		<br>
+		<div class="row justify-content-center mt-3 ml-4">
+			<div class="col-md-4 col-lg-20 ml-4">
+				<p class="lead" style="font-size: 20px;color: grey;">Founder of Hyve : <em>Alexandre Lisiecki</em></p>
+			</div>
+		</div>
+		<br>
+		<br>
+	</div>
+
+	<script>
+		function formatTags() {
+			const elements = document.getElementsByClassName('body');
+			for (let i = 0; i < elements.length; i++) {
+				let bodyText = elements[i].children[0].innerText;
+
+				let words = bodyText.split(' ');
+
+				for (let j = 0; j < words.length; j++) {
+					if (words[j][0] === '#') {
+						let replacedText = bodyText.replace(/\s\#(.*?)(\s|$)/g, ` <a href="#">${words[j]}</a>`);
+						elements[i].innerHTML = replacedText;
+					}
+				}
+			}
+		}
+
+		formatTags();
+	</script>
+{% endblock %}
+

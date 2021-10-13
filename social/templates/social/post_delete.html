@@ -1,0 +1,42 @@
+{% extends 'landing/base.html' %}
+
+
+{% block title %}Delete Post{% endblock %}
+
+{% block content %}
+	<div class="container">
+
+		<div class="row mt-5">
+			<div class="col-md-2 col-sm-2">
+				<a class="btn btn-dark" href="{% url 'post-detail' object.pk %}">Return</a>
+			</div>
+		</div>
+
+		<div class="row justify-content-center mt-3">
+			<div class="col-md-5 col-sm-12">
+				<form method="POST">
+					{% csrf_token %}
+					<h5 class="lead" style="font-size: 35px;">Are you sure?</h5>
+					<hr>
+					<br>
+					<p class="lead">You are about to delete this post. This action will be definitive.</p>
+					<div class="d-grid gap-2 mt-4 mb-3">
+						<button class="btn btn-outline-danger">Yes, Delete.</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<br>
+		<br>
+		<hr>
+		<br>
+		<div class="row justify-content-center mt-3 ml-4">
+			<div class="col-md-4 col-lg-20 ml-4">
+				<p class="lead" style="font-size: 20px;color: grey;">Founder of Hyve : <em>Alexandre Lisiecki</em></p>
+			</div>
+		</div>
+		<br>
+		<br>
+	</div>
+{% endblock %}
+
